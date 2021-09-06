@@ -21,7 +21,7 @@ public class MainClient extends Application{
 	Socket socket;
 	TextArea textArea;
 	int port = 5001;
-	String ip = "172.30.74.54";
+	String ip = "211.221.45.233"; // ip맞추지 않으면 널포인트
 	
 	// 클라이언트 connect
 	public void startClient(String IP, int port) {
@@ -30,7 +30,6 @@ public class MainClient extends Application{
 				try {
 					socket = new Socket(IP, port);
 					receive();
-					System.out.println("Connect2");
 				} catch (IOException e) {
 					if(!socket.isClosed()) {
 						stopClient();
@@ -79,10 +78,10 @@ public class MainClient extends Application{
 		Thread thread = new Thread() {
 			public void run() {
 				try {
+					System.out.println(socket);
 					OutputStream out = socket.getOutputStream();
 					byte[] buffer = message.getBytes("UTF-8");
 					out.write(buffer);
-					System.out.println(" out " + out.toString());
 					out.flush();
 				} catch (IOException e) {
 					stopClient();
@@ -145,7 +144,7 @@ public class MainClient extends Application{
 				
 				startClient(IPText.getText(), port);
 				Platform.runLater(() -> {
-					textArea.appendText("[ 채팅방 접속 ]\n");
+					textArea.appendText("[ " +userName.getText()+ "님이 채팅방 접속 ]\n");
 				});
 				connectionButton.setText("종료하기");
 				input.setDisable(false);
@@ -154,7 +153,7 @@ public class MainClient extends Application{
 			} else {
 				stopClient();
 				Platform.runLater(() -> {
-					textArea.appendText("[ 채팅방 퇴장 ]\n");
+					textArea.appendText("[ " +userName.getText()+ "님이 채팅방 퇴장 ]\n");
 				});
 				connectionButton.setText("접속하기");
 				input.setDisable(true);
