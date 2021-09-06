@@ -23,8 +23,9 @@ public class IoMethod {
 						InputStream in = socket.getInputStream();
 						byte[] buffer = new byte[512];
 						int length = in.read(buffer);
-						if (length == -1)
-							throw new IOException();
+						
+						if (length == -1) throw new IOException();
+						
 						System.out.println("[메시지 수신 성공] " + socket.getRemoteSocketAddress() + ": "
 								+ Thread.currentThread().getName());
 
