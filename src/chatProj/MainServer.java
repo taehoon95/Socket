@@ -5,8 +5,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -22,13 +22,13 @@ import javafx.stage.Stage;
 
 public class MainServer extends Application{
 
-	// ExecutorService는 여러 개의 쓰레드를 효율적으로 관리하기 위한 대표적인 라이브러리입니다. 
+	// ExecutorService는 여러 개의 쓰레드를 효율적으로 관리하기 위한 라이브러리
 	// Thread Pool로 쓰레드를 처리하게 되면 기본적인 쓰레드 숫자의 제한을 두기 때문에 
-	// 갑작스런 Client 폭증에도 쓰레드의 수에는 제한이 있어 서버의 성능 저하를 방지할 수 있습니다. 
+	// 갑작스런 Client 폭증에도 쓰레드의 수에는 제한이 있어 서버의 성능 저하를 방지할 수 있다. 
 	// 한정된 자원을 '안정적으로' 관리하기 위한 대비책
-
 	public static ExecutorService threadPool;
-	public static ArrayList<IoMethod> clients = new ArrayList<IoMethod>();
+	
+	public static LinkedList<IoMethod> clients = new LinkedList<IoMethod>();
 	
 	ServerSocket serverSocket;
 	
